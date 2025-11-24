@@ -23,13 +23,13 @@ services:
       - key: APP_URL
         fromService:
           type: web
-          name: estacoes-manager
+          name: gerenciador-de-livros
           property: url # Pega a URL do serviço automaticamente
       - key: DB_CONNECTION
         value: pgsql
       - key: DATABASE_URL # Conecta ao banco de dados de forma simples
         fromDatabase:
-          name: estacoes-db
+          name: livros-db
           property: connectionString
       - key: APP_ENV
         value: production
@@ -41,9 +41,9 @@ services:
 
 # Define o banco de dados
 databases:
-  - name: estacoes-db
-    databaseName: lojamanager
-    user: lojamanager_user
+  - name: livros-db
+    databaseName: livros
+    user: livros-db-user
     plan: free
     region: oregon
     postgresMajorVersion: "14" # <-- RECOMENDADO: Usar uma versão mais estável
