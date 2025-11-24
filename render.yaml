@@ -21,10 +21,7 @@ services:
       - key: APP_KEY
         generateValue: true # Deixa o Render gerar uma chave segura
       - key: APP_URL
-        fromService:
-          type: web
-          name: gerenciador-de-livros
-          property: url # Pega a URL do serviço automaticamente
+        value: https://gerenciador-de-livros.onrender.com
       - key: DB_CONNECTION
         value: pgsql
       - key: DATABASE_URL # Conecta ao banco de dados de forma simples
@@ -43,7 +40,7 @@ services:
 databases:
   - name: livros-db
     databaseName: livros
-    user: livros-db-user
+    user: livros_user
     plan: free
     region: oregon
     postgresMajorVersion: "14" # <-- RECOMENDADO: Usar uma versão mais estável
