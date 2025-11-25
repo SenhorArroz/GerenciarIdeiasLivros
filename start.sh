@@ -27,7 +27,7 @@ echo "Waiting for database..."
 php artisan key:generate --force
 php artisan storage:link
 echo "Running database migrations..."
-php artisan db:fresh
+php artisan migrate:fresh
 
 
 # Configura Apache para escutar na porta correta do Render
