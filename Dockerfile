@@ -19,7 +19,7 @@ RUN a2enmod rewrite \
     && sed -i 's/AllowOverride None/AllowOverride All/g' /etc/apache2/apache2.conf
 
 # Expondo porta (Render sobrescreve a variável PORT)
-ENV PORT 10000
+ENV PORT 8080
 EXPOSE $PORT
 
 # Copia o código da aplicação
