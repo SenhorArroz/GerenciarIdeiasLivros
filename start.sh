@@ -25,7 +25,7 @@ echo "Waiting for database..."
 # Nota: Removi o migrate:status aqui pois as vezes falha na primeira conexão
 # Se o DB estiver no mesmo render.yaml, ele deve estar acessível logo
 php artisan key:generate --force
-
+php artisan storage:link
 echo "Running database migrations..."
 php artisan db:fresh
 
