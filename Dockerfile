@@ -4,7 +4,7 @@ FROM php:8.2-apache
 # Instala Composer globalmente
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 
-# Instala dependências do sistema e extensão PostgreSQL
+# Instala dependências do sistema e PostgreSQL
 RUN apt-get update && apt-get install -y --no-install-recommends \
         libpq-dev \
         git \
@@ -17,6 +17,10 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 RUN a2enmod rewrite \
     && sed -i 's|/var/www/html|/var/www/html/public|g' /etc/apache2/sites-available/000-default.conf \
     && sed -i 's/AllowOverride None/AllowOverride All/g' /etc/apache2/apache2.conf
+
+# Expondo porta (Render sobrescreve a variável PORT)
+ENV PORT 10000
+EXPOSE $PORT
 
 # Copia o código da aplicação
 COPY . /var/www/html

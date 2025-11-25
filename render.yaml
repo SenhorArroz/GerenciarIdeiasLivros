@@ -16,10 +16,16 @@ services:
         value: https://gerenciador-de-livros.onrender.com
       - key: DB_CONNECTION
         value: pgsql
-      - key: DATABASE_URL
-        fromDatabase:
-          name: livros-db
-          property: connectionString
+      - key: DB_HOST
+        value: dpg-d4ievoshg0os739smdq0-a
+      - key: DB_PORT
+        value: 5432
+      - key: DB_DATABASE
+        value: livros
+      - key: DB_USERNAME
+        value: livros_user
+      - key: DB_PASSWORD
+        value: 35Z8dZG87Que6kJuwTIpaGVJAfMGWcsp
       - key: APP_ENV
         value: production
       - key: APP_DEBUG
@@ -28,7 +34,7 @@ services:
 databases:
   - name: livros-db
     databaseName: livros
-    user: livrosdbuser
+    user: livros_user
     plan: free
     region: oregon
     postgresMajorVersion: "14"

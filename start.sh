@@ -27,5 +27,8 @@ php artisan migrate --force
 # echo "Running seeders..."
 # php artisan db:seed --force
 
-echo "Starting Apache server..."
+# Configura Apache para escutar na porta do Render e inicia
+echo "Starting Apache server on port ${PORT}..."
+sed -i "s/80/${PORT}/g" /etc/apache2/ports.conf
+sed -i "s/<VirtualHost \*:80>/<VirtualHost *:${PORT}>/g" /etc/apache2/sites-available/000-default.conf
 exec apache2-foreground
