@@ -17,15 +17,15 @@ services:
       - key: DB_CONNECTION
         value: pgsql
       - key: DB_HOST
-        value: dpg-d4ievoshg0os739smdq0-a
+        value: seu_host_do_banco
       - key: DB_PORT
         value: 5432
       - key: DB_DATABASE
         value: livros
       - key: DB_USERNAME
-        value: livros_user
+        value: livrosdbuser
       - key: DB_PASSWORD
-        value: 35Z8dZG87Que6kJuwTIpaGVJAfMGWcsp
+        value: sua_senha_do_banco
       - key: APP_ENV
         value: production
       - key: APP_DEBUG
@@ -34,7 +34,7 @@ services:
 databases:
   - name: livros-db
     databaseName: livros
-    user: livros_user
+    user: livrosdbuser
     plan: free
     region: oregon
     postgresMajorVersion: "14"
