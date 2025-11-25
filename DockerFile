@@ -32,3 +32,4 @@ RUN chown -R www-data:www-data /var/www/html/storage /var/www/html/bootstrap/cac
 
 # Define o script de inicialização como o comando padrão
 CMD ["/usr/local/bin/start.sh"]
+
