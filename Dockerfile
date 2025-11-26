@@ -1,36 +1,30 @@
-# Imagem base PHP 8.2 com Apache
 FROM php:8.2-apache
 
-# Instala Composer globalmente
+# Instala Composer
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 
-# Instala dependências do sistema e PostgreSQL
-RUN apt-get update && apt-get install -y --no-install-recommends \
-        libpq-dev \
-        git \
-        zip \
-        unzip \
+# Dependências
+RUN apt-get update && apt-get install -y \
+    libpq-dev git zip unzip \
     && docker-php-ext-install pdo pdo_pgsql \
-    && apt-get clean && rm -rf /var/lib/apt/lists/*
+    && rm -rf /var/lib/apt/lists/*
 
-# Configura Apache para servir a pasta /public e habilita mod_rewrite
+# Ativa mod_rewrite e define /public
 RUN a2enmod rewrite \
     && sed -i 's|/var/www/html|/var/www/html/public|g' /etc/apache2/sites-available/000-default.conf \
     && sed -i 's/AllowOverride None/AllowOverride All/g' /etc/apache2/apache2.conf
 
-# Expondo porta (Render sobrescreve a variável PORT)
-ENV PORT 8080
-EXPOSE $PORT
+# Render usa PORT
+ENV PORT=10000
+EXPOSE 10000
 
-# Copia o código da aplicação
+# Código da aplicação
 COPY . /var/www/html
 
-# Copia o script de inicialização e dá permissão
+# Start script
 COPY start.sh /usr/local/bin/start.sh
 RUN chmod +x /usr/local/bin/start.sh
 
-# Define permissões para storage e cache
 RUN chown -R www-data:www-data /var/www/html/storage /var/www/html/bootstrap/cache
 
-# Define comando padrão
 CMD ["/usr/local/bin/start.sh"]

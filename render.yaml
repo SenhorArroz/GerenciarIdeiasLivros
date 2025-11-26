@@ -6,7 +6,6 @@ services:
     plan: free
     region: oregon
     autoDeploy: true
-    dockerCommand: "/usr/local/bin/start.sh"
     dockerContext: .
     dockerfilePath: Dockerfile
     envVars:
@@ -14,8 +13,12 @@ services:
         generateValue: true
       - key: APP_URL
         value: https://gerenciador-de-livros.onrender.com
+      - key: APP_ENV
+        value: production
+      - key: APP_DEBUG
+        value: false
       - key: DB_CONNECTION
-        value: pgsql
+        value: pgsql  
       - key: DB_HOST
         value: dpg-d4ievoshg0os739smdq0-a
       - key: DB_PORT
@@ -26,15 +29,3 @@ services:
         value: livros_user
       - key: DB_PASSWORD
         value: 35Z8dZG87Que6kJuwTIpaGVJAfMGWcsp
-      - key: APP_ENV
-        value: production
-      - key: APP_DEBUG
-        value: false
-
-databases:
-  - name: livros-db
-    databaseName: livros_pm00
-    user: livros_user
-    plan: free
-    region: oregon
-    postgresMajorVersion: "14"
