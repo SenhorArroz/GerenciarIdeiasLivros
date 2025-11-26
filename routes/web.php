@@ -10,6 +10,15 @@ use App\Http\Controllers\PersonagensController;
 use App\Http\Controllers\SiteController;
 use Illuminate\Support\Facades\Route;
 
+Route::get('/debug', function () {
+    try {
+        \Illuminate\Support\Facades\DB::connection()->getPdo();
+        return 'DB OK, APP OK, TUDO OK';
+    } catch (\Exception $e) {
+        return 'ERRO DE DB: ' . $e->getMessage();
+    }
+});
+
 Route::get('/', [SiteController::class, 'home'])->name('site.home');
 
 Route::post('/addLivro', [LivrosController::class, 'store'])->name('livros.store');
@@ -24,9 +33,9 @@ Route::patch('/{nome}/{id}/update', [LivrosController::class, 'update'])->name('
 Route::delete('/{nome}/{id}/delete', [LivrosController::class, 'destroy'])->name('livros.delete');
 
 Route::post('/{nome}/{id}/personagens', [PersonagensController::class, 'store'])->name('personagens.store');
-Route::get('/{nome}/{id}/personagens/{personagem}/{perid}', [SiteController::class, 'showPersonagem'])->name('personagens.show'); 
+Route::get('/{nome}/{id}/personagens/{personagem}/{perid}', [SiteController::class, 'showPersonagem'])->name('personagens.show');
 Route::put('/{nome}/{id}/personagens/{personagem}', [PersonagensController::class, 'update'])->name('personagens.update');
-Route::delete('/{nome}/{id}/personagens/{personagem}/{perid}', [PersonagensController::class, 'destroy'])->name('personagens.destroy'); 
+Route::delete('/{nome}/{id}/personagens/{personagem}/{perid}', [PersonagensController::class, 'destroy'])->name('personagens.destroy');
 
 Route::post('/livros/{livro}/locais', [LocaisController::class, 'store'])->name('locais.store');
 Route::put('/livros/{livro}/locais/{local}', [LocaisController::class, 'update'])->name('locais.update');
